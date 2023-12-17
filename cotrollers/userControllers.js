@@ -17,7 +17,7 @@ const loginUser = async (req, res) => {
       throw new Error("Email or password is incorrect!");
     }
     const token = await createToken(user._id);
-    res.status(200).json({ user, token });
+    res.status(200).json({ email: user.email, token });
   } catch (error) {
     console.log(error);
     res.status(401).json(error.message);
@@ -30,7 +30,7 @@ const signupUser = async (req, res) => {
 
     //create token
     const token = await createToken(user._id);
-    res.status(200).json({ user, token });
+    res.status(200).json({ email: user.email, token });
   } catch (error) {
     const errors = userErrors(error);
     res.status(400).json(errors);
