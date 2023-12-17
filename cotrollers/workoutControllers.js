@@ -1,5 +1,6 @@
 import Workout from "../models/Workout.js";
 import handleErrors from "../errors/handleErrors.js";
+import validateId from "../utils/validateId.js";
 const addWorkout = async (req, res) => {
   try {
     const workout = await Workout.create(req.body);
@@ -22,6 +23,9 @@ const getWorkouts = async (req, res) => {
 const getWorkout = async (req, res) => {
   try {
     const { id } = req.params;
+    if (!validateId(id)) {
+      return res.status(404).json("Page not found!");
+    }
     const workout = await Workout.findById(id);
     res.status(200).json(workout);
   } catch (error) {
@@ -32,6 +36,9 @@ const getWorkout = async (req, res) => {
 const updateWorkout = async (req, res) => {
   try {
     const { id } = req.params;
+    if (!validateId(id)) {
+      return res.status(404).json("Page not found!");
+    }
     const workout = await Workout.findByIdAndUpdate(id, req.body);
     res.status(200).json(workout);
   } catch (error) {
@@ -42,6 +49,9 @@ const updateWorkout = async (req, res) => {
 const deleteWorkout = async (req, res) => {
   try {
     const { id } = req.params;
+    if (!validateId(id)) {
+      return res.status(404).json("Page not found!");
+    }
     const workout = await Workout.findByIdAndDelete(id);
     res.status(200).json(workout);
   } catch (error) {
