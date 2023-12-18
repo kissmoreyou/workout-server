@@ -3,7 +3,7 @@ import handleErrors from "../errors/handleErrors.js";
 import validateId from "../utils/validateId.js";
 const addWorkout = async (req, res) => {
   try {
-    const workout = await Workout.create(req.body);
+    const workout = await Workout.create({ ...req.body, userID: req.user.id });
     res.status(200).json(workout);
   } catch (error) {
     const errors = handleErrors(error);
@@ -13,7 +13,7 @@ const addWorkout = async (req, res) => {
 
 const getWorkouts = async (req, res) => {
   try {
-    const workouts = await Workout.find({});
+    const workouts = await Workout.find({ userID: req.user.id });
     res.status(200).json(workouts);
   } catch (error) {
     console.log(error.message);

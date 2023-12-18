@@ -11,6 +11,7 @@ const WorkoutSchema = new mongoose.Schema(
       required: [true, "Weight is required!"],
     },
     reps: { type: Number, required: [true, "Reps is required!"] },
+    userID: { type: String, required: true },
   },
   { timestamps: true }
 );

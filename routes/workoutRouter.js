@@ -1,4 +1,5 @@
 import express from "express";
+import requireAuth from "../middlewares/requireAuth.js";
 const router = express.Router();
 import {
   addWorkout,
@@ -7,7 +8,7 @@ import {
   updateWorkout,
   deleteWorkout,
 } from "../cotrollers/workoutControllers.js";
-
+router.use(requireAuth);
 //add workout
 router.post("/", addWorkout);
 
